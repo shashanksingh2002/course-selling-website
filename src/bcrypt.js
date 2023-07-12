@@ -6,5 +6,10 @@ module.exports = {
        return bcrypt.hash(myPlaintextPassword,saltRounds)
                 .then(hash => hash)
                 .catch(err => err)
-       }
+    },
+    cmpHashedPassword: (myPlaintextPassword,hashedPassword) => {
+        return bcrypt.compare(myPlaintextPassword,hashedPassword)
+               .then(found => found)
+               .catch(err => console.error(err))
+    }
 }
