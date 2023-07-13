@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 module.exports = {
     searchInDbForEmail: (req,db,who) => {
         const body = {
@@ -21,5 +23,17 @@ module.exports = {
                 return dataArr;
                })
                .catch(err => console.error(err))
+    },
+    searchCourseInDb: (id,db) => {
+        return db.collection('courses')
+                .findOne({_id:new ObjectId(id)})
+                .then(present => present)
+                .catch(err => console.error(err))
+    },
+    searchCourseInUsers: (id,db,req) => {
+        return db.collection('users')
+                .findOne({courses:{$in:[id]}})
+                .then(found => found)
+                .catch(err => console.error(err));
     }
 };

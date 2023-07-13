@@ -7,6 +7,7 @@ const port = 3000;
 //functions requirement
 const { createDb } = require('./database/backend');
 const { adminSignup, adminLogin, addCourse, updateCourse, getCourses} = require('./routes/adminRoutes');
+const { userSignup, userLogin, purchaseCourse, purchasedCourseByUser} = require('./routes/userRoutes');
 const { authenticateJWT } = require('./src/jwt');
 const { isAdmin } = require('./src/checkindb');
 
@@ -37,7 +38,7 @@ createDb((flag,data) => {
 
 //admin Routes
 /*
-POST /admin/signup Description: Creates a new admin account. Input: { username: 'admin', password: 'pass' } Output: { message: 'Admin created successfully', token: 'jwt_token_here' }
+POST /admin/signup Description: Creates a new admin account. Input: { username: 'admin', password: 'pass' } Output: { message: 'Admin created successfully'}
 */
 
 app.post('/admin/signup', (req,res) => {
@@ -53,7 +54,7 @@ app.post('/admin/login', (req,res) => {
 });
 
 /*
-POST /admin/courses Description: Creates a new course. Input: Headers: { 'Authorization': 'Bearer jwt_token_here' }, Body: { title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true } Output: { message: 'Course created successfully', courseId: 1 }
+POST /admin/courses Description: Creates a new course. Input: Headers: { 'Authorization': 'Bearer jwt_token_here' }, Body: { title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true } Output: { message: 'Course created successfully'}
 */
 
 app.post('/admin/courses', (req,res) => {
@@ -79,21 +80,41 @@ app.get('/admin/courses', (req,res) => {
 //user Routes
 
 /*
-POST /users/signup Description: Creates a new user account. Input: { username: 'user', password: 'pass' } Output: { message: 'User created successfully', token: 'jwt_token_here' }
+POST /users/signup Description: Creates a new user account. Input: { username: 'user', password: 'pass' } Output: { message: 'User created successfully'}
 */
+
+app.post('/users/signup', (req,res) => {
+    userSignup(req,res,db);
+});
 
 /*
 POST /users/login Description: Authenticates a user. It requires the user to send username and password in the headers. Input: Headers: { 'username': 'user', 'password': 'pass' } Output: { message: 'Logged in successfully', token: 'jwt_token_here' }
 */
 
+app.post('/users/login', (req,res) => {
+    userLogin(req,res,db);
+});
+
 /*
 GET /users/courses Description: Lists all the courses. Input: Headers: { 'Authorization': 'Bearer jwt_token_here' } Output: { courses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
 */
+
+app.get('/users/courses', (req,res) => {
+    getCourses(req,res,db);
+});
 
 /*
 POST /users/courses/:courseId Description: Purchases a course. courseId in the URL path should be replaced with the ID of the course to be purchased. Input: Headers: { 'Authorization': 'Bearer jwt_token_here' } Output: { message: 'Course purchased successfully' }
 */
 
+app.post('/users/courses/:courseId', (req,res) => {
+    purchaseCourse(req,res,db);
+});
+
 /*
 GET /users/purchasedCourses Description: Lists all the courses purchased by the user. Input: Headers: { 'Authorization': 'Bearer jwt_token_here' } Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
 */
+
+app.get('/users/purchasedCourses', (req,res) => {
+    purchasedCourseByUser(req,res,db);
+});
