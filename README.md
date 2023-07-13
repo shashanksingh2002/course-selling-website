@@ -191,6 +191,7 @@
     <td>
       <ul>
         <li>Authorization: String (required) - Bearer token</li>
+        <li>user email in body(required)</li>
       </ul>
     </td>
     <td>
@@ -206,6 +207,7 @@
     <td>
       <ul>
         <li>Authorization: String (required) - Bearer token</li>
+        <li>user email in body(required)</li>
       </ul>
     </td>
     <td>
