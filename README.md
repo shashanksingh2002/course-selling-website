@@ -81,6 +81,7 @@
         <li>price: Number (required) - Course price</li>
         <li>imageLink: String (required) - URL of the course image</li>
         <li>published: Boolean (required) - Course publish status</li>
+        <li>isAdmin: Boolean (required) - check if admin or user to prevent users from accessing admin routes store this in body</li>
       </ul>
     </td>
     <td>
@@ -103,6 +104,7 @@
         <li>price: Number (required) - Updated course price</li>
         <li>imageLink: String (required) - Updated URL of the course image</li>
         <li>published: Boolean (required) - Updated course publish status</li>
+         <li>isAdmin: Boolean (required) - check if admin or user to prevent users from accessing admin routes store this in body</li>
       </ul>
     </td>
     <td>
@@ -118,6 +120,7 @@
     <td>
       <ul>
         <li>Authorization: String (required) - Bearer token</li>
+        <li>isAdmin: Boolean (required) - check if admin or user to prevent users from accessing admin routes</li>
       </ul>
     </td>
     <td>
@@ -226,6 +229,7 @@
     <li>The mongodb should run on mongodb://localhost:27017</li>
     <li>Make sure that the database name should be course-selling-website</li>
     <li>It should have 3 collections 'users','admin','courses'</li>
+    <li>Make sure you are sending "isAdmin":true in the request body for all the admin routes</li>
     <li>Start the server: <code>npm start</code></li>
     <li>Use a tool like Postman to send requests to the available API endpoints according to the request formats mentioned
       above.</li>
@@ -233,7 +237,7 @@
   </ol>
 
   <h2>Conclusion</h2>
-
+  <p>There is a vulnerability in the backend as of now (i.e) A user can send "isAdmin":true in the request body and can access admin routes but this can be easily removed by having 2 secret keys one for admin and one for user during the creation of JWT</p>
   <p>
     The backend of the Course Selling Website provides a secure and efficient API for managing courses, user authentication, and course purchasing. Users can interact with the backend by sending requests via tools like Postman. Feel free to explore the API endpoints and integrate the backend into your project.
   </p>
