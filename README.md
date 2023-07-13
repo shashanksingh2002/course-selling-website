@@ -223,6 +223,9 @@
   <h2>Usage</h2>
   <ol>
     <li>Make sure you have MongoDB installed and running on your machine.</li>
+    <li>The mongodb should run on mongodb://localhost:27017</li>
+    <li>Make sure that the database name should be course-selling-website</li>
+    <li>It should have 3 collections 'users','admin','courses'</li>
     <li>Start the server: <code>npm start</code></li>
     <li>Use a tool like Postman to send requests to the available API endpoints according to the request formats mentioned
       above.</li>
