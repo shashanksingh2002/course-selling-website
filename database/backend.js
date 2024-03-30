@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 
 
 //Fill your own Mongodb uri
-const uri = 'mongodb://0.0.0.0:27017';
+const uri = 'mongodb+srv://shashanksingh:Qwerty2002@cluster0.a6k5yop.mongodb.net/';
 const dbName = 'course-selling-website';
 
 
